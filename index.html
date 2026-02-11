@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>College Compass - Premium Entrance Exam Portal</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
@@ -28,10 +26,9 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     
-    <script type="text/babel" data-type="module">
+    <script type="text/babel">
         const { useState, useEffect } = React;
         
-        // Icon component
         const LucideIcon = ({ name, className = "w-5 h-5", ...props }) => {
             const ref = React.useRef(null);
             useEffect(() => {
@@ -43,27 +40,284 @@
         };
 
         const entranceExams = [
-            { id: 1, name: "JEE Main", fullName: "Joint Entrance Examination Main", difficulty: "High", candidates: "~12 lakh", seats: "~1.5 lakh", duration: "3 hours", regDate: "Dec 2025 - Jan 2026", examDate: "Jan & April 2026", regFee: "₹1,000 (Gen), ₹500 (SC/ST)", syllabus: "Physics, Chemistry, Mathematics (Class 11-12 NCERT)", degrees: ["B.Tech", "B.E.", "B.Arch"], topColleges: [{ name: "NIT Trichy", cutoff: "98.5%ile", avgPkg: "₹16 LPA", highPkg: "₹42 LPA", fee: "₹1.5L/yr", type: "Government" }, { name: "NIT Surathkal", cutoff: "98.2%ile", avgPkg: "₹15 LPA", highPkg: "₹40 LPA", fee: "₹1.4L/yr", type: "Government" }, { name: "IIIT Hyderabad", cutoff: "99.3%ile", avgPkg: "₹24 LPA", highPkg: "₹60 LPA", fee: "₹2.5L/yr", type: "Government" }, { name: "NIT Warangal", cutoff: "98%ile", avgPkg: "₹14 LPA", highPkg: "₹38 LPA", fee: "₹1.3L/yr", type: "Government" }] },
-            { id: 2, name: "JEE Advanced", fullName: "Joint Entrance Examination Advanced", difficulty: "Very High", candidates: "~2.5 lakh", seats: "~16,000", duration: "3 hours × 2 papers", regDate: "May 2026", examDate: "May 2026", regFee: "₹2,800 (Gen), ₹1,400 (SC/ST/PwD)", syllabus: "Advanced Physics, Chemistry, Mathematics", degrees: ["B.Tech", "Dual Degree", "Integrated M.Tech"], topColleges: [{ name: "IIT Bombay", cutoff: "Rank 100", avgPkg: "₹23 LPA", highPkg: "₹2.14 Cr", fee: "₹2.3L/yr", type: "Government" }, { name: "IIT Delhi", cutoff: "Rank 200", avgPkg: "₹21 LPA", highPkg: "₹2 Cr", fee: "₹2.3L/yr", type: "Government" }, { name: "IIT Madras", cutoff: "Rank 180", avgPkg: "₹22 LPA", highPkg: "₹1.9 Cr", fee: "₹2.3L/yr", type: "Government" }, { name: "IIT Kanpur", cutoff: "Rank 250", avgPkg: "₹20 LPA", highPkg: "₹1.8 Cr", fee: "₹2.3L/yr", type: "Government" }, { name: "IIT Kharagpur", cutoff: "Rank 300", avgPkg: "₹19 LPA", highPkg: "₹1.7 Cr", fee: "₹2.2L/yr", type: "Government" }] },
-            { id: 3, name: "BITSAT", fullName: "BITS Admission Test", difficulty: "High", candidates: "~2.5 lakh", seats: "~4,000", duration: "3 hours", regDate: "Jan - Mar 2026", examDate: "May - June 2026", regFee: "₹3,400 (Male), ₹2,900 (Female)", syllabus: "Physics, Chemistry, Mathematics, English, Logical Reasoning", degrees: ["B.E.", "B.Pharm", "M.Sc."], topColleges: [{ name: "BITS Pilani", cutoff: "320/390", avgPkg: "₹18 LPA", highPkg: "₹60 LPA", fee: "₹5.5L/yr", type: "Private" }, { name: "BITS Goa", cutoff: "295/390", avgPkg: "₹16 LPA", highPkg: "₹55 LPA", fee: "₹5.3L/yr", type: "Private" }, { name: "BITS Hyderabad", cutoff: "285/390", avgPkg: "₹15 LPA", highPkg: "₹50 LPA", fee: "₹5.3L/yr", type: "Private" }] },
-            { id: 4, name: "VITEEE", fullName: "VIT Engineering Entrance Exam", difficulty: "Moderate-High", candidates: "~5 lakh", seats: "~8,000", duration: "2.5 hours", regDate: "Nov 2025 - Feb 2026", examDate: "April 2026", regFee: "₹1,150", syllabus: "Physics, Chemistry, Mathematics, English", degrees: ["B.Tech"], topColleges: [{ name: "VIT Vellore", cutoff: "Rank 5,000", avgPkg: "₹8.5 LPA", highPkg: "₹45 LPA", fee: "₹2L-4L/yr", type: "Private" }, { name: "VIT Chennai", cutoff: "Rank 15,000", avgPkg: "₹7 LPA", highPkg: "₹38 LPA", fee: "₹2L-4L/yr", type: "Private" }] },
-            { id: 5, name: "SRMJEEE", fullName: "SRM Joint Engineering Entrance Exam", difficulty: "Moderate", candidates: "~2.5 lakh", seats: "~10,000", duration: "2.5 hours", regDate: "Dec 2025 - March 2026", examDate: "April 2026", regFee: "₹1,100", syllabus: "Physics, Chemistry, Mathematics/Biology", degrees: ["B.Tech", "B.Arch"], topColleges: [{ name: "SRM Chennai", cutoff: "Rank 8,000", avgPkg: "₹7.5 LPA", highPkg: "₹42 LPA", fee: "₹2.5L-4L/yr", type: "Private" }] },
-            { id: 6, name: "MET", fullName: "Manipal Engineering Test", difficulty: "Moderate", candidates: "~1.8 lakh", seats: "~6,000", duration: "2.5 hours", regDate: "Jan - April 2026", examDate: "April - May 2026", regFee: "₹2,500", syllabus: "Physics, Chemistry, Mathematics, English", degrees: ["B.Tech"], topColleges: [{ name: "MIT Manipal", cutoff: "Rank 3,000", avgPkg: "₹7.8 LPA", highPkg: "₹43 LPA", fee: "₹3.5L/yr", type: "Private" }] },
-            { id: 7, name: "COMEDK", fullName: "Consortium of Medical, Engineering and Dental Colleges of Karnataka", difficulty: "Moderate-High", candidates: "~80,000", seats: "~35,000", duration: "3 hours", regDate: "March - April 2026", examDate: "May 2026", regFee: "₹1,800", syllabus: "Physics, Chemistry, Mathematics (Karnataka PUC)", degrees: ["B.Tech", "B.Arch"], topColleges: [{ name: "RV College (RVCE)", cutoff: "Rank 800", avgPkg: "₹10 LPA", highPkg: "₹45 LPA", fee: "₹1.2L/yr", type: "Private" }, { name: "BMS College", cutoff: "Rank 1,200", avgPkg: "₹8.5 LPA", highPkg: "₹40 LPA", fee: "₹1L/yr", type: "Private" }] },
-            { id: 8, name: "MHT CET", fullName: "Maharashtra Common Entrance Test", difficulty: "Moderate", candidates: "~4.5 lakh", seats: "~1.5 lakh", duration: "90 min × 2 papers", regDate: "March - April 2026", examDate: "May 2026", regFee: "₹1,000", syllabus: "Physics, Chemistry, Mathematics (Maharashtra HSC)", degrees: ["B.Tech", "B.E."], topColleges: [{ name: "VJTI Mumbai", cutoff: "99.5%ile", avgPkg: "₹10 LPA", highPkg: "₹40 LPA", fee: "₹80k/yr", type: "Government" }, { name: "COEP Pune", cutoff: "99%ile", avgPkg: "₹9 LPA", highPkg: "₹35 LPA", fee: "₹75k/yr", type: "Government" }] },
-            { id: 9, name: "WBJEE", fullName: "West Bengal Joint Entrance Examination", difficulty: "Moderate", candidates: "~1.5 lakh", seats: "~75,000", duration: "2 hours × 2 papers", regDate: "Dec 2025 - March 2026", examDate: "April 2026", regFee: "₹500 (Gen), ₹450 (SC/ST)", syllabus: "Physics, Chemistry, Mathematics (WBCHSE)", degrees: ["B.Tech", "B.E.", "B.Pharm"], topColleges: [{ name: "Jadavpur University", cutoff: "Rank 200", avgPkg: "₹9 LPA", highPkg: "₹35 LPA", fee: "₹12k/yr", type: "Government" }] },
-            { id: 10, name: "KIITEE", fullName: "KIIT Entrance Examination", difficulty: "Moderate", candidates: "~1 lakh", seats: "~8,000", duration: "3 hours", regDate: "Nov 2025 - March 2026", examDate: "April 2026", regFee: "₹2,000", syllabus: "Physics, Chemistry, Mathematics", degrees: ["B.Tech", "B.Arch"], topColleges: [{ name: "KIIT Bhubaneswar", cutoff: "Rank 5,000", avgPkg: "₹7.5 LPA", highPkg: "₹39 LPA", fee: "₹3L/yr", type: "Private" }] },
-            { id: 11, name: "IPM (IIM)", fullName: "Integrated Programme in Management", difficulty: "High", candidates: "~25,000", seats: "~600", duration: "3 hours", regDate: "Feb - March 2026", examDate: "May 2026", regFee: "₹3,500", syllabus: "Quantitative Ability, Verbal Ability, Logical Reasoning", degrees: ["BBA + MBA (5 years)"], topColleges: [{ name: "IIM Indore", cutoff: "99.5%ile", avgPkg: "₹25 LPA", highPkg: "₹55 LPA", fee: "₹6L/yr", type: "Government" }, { name: "IIM Rohtak", cutoff: "98.5%ile", avgPkg: "₹20 LPA", highPkg: "₹45 LPA", fee: "₹5.5L/yr", type: "Government" }] },
-            { id: 12, name: "NMIMS NPAT", fullName: "Narsee Monjee Proficiency Assessment Test", difficulty: "Moderate-High", candidates: "~60,000", seats: "~2,000", duration: "2 hours", regDate: "Jan - April 2026", examDate: "May 2026", regFee: "₹2,000", syllabus: "Quantitative, Language, Logical Reasoning, Proficiency", degrees: ["BBA, B.Tech + MBA, Integrated MBA"], topColleges: [{ name: "NMIMS Mumbai", cutoff: "85%ile", avgPkg: "₹12 LPA", highPkg: "₹25 LPA", fee: "₹3.8L/yr", type: "Private" }] },
-            { id: 13, name: "CUET", fullName: "Common University Entrance Test", difficulty: "Moderate", candidates: "~15 lakh", seats: "~3 lakh", duration: "45-60 min per section", regDate: "Feb - March 2026", examDate: "May 2026", regFee: "₹650-1,300", syllabus: "Domain subjects, General Test, Languages", degrees: ["BA Economics, BA (Hons), B.Com, BMS"], topColleges: [{ name: "DU - St. Stephen's", cutoff: "99.8%ile", avgPkg: "₹8 LPA", highPkg: "₹20 LPA", fee: "₹50k/yr", type: "Government" }, { name: "JNU", cutoff: "99%ile", avgPkg: "₹7 LPA", highPkg: "₹18 LPA", fee: "₹30k/yr", type: "Government" }] },
-            { id: 14, name: "Thapar JEE", fullName: "Thapar Institute of Engineering and Technology", difficulty: "Moderate", candidates: "Based on JEE Main", seats: "~4,000", duration: "JEE Main scores", regDate: "March - June 2026", examDate: "Admission via JEE Main", regFee: "₹1,800", syllabus: "JEE Main syllabus", degrees: ["B.E.", "B.Tech"], topColleges: [{ name: "Thapar Patiala", cutoff: "93%ile JEE", avgPkg: "₹10 LPA", highPkg: "₹43 LPA", fee: "₹3.5L/yr", type: "Private" }] }
+            { 
+                id: 1, 
+                name: "JEE Main", 
+                fullName: "Joint Entrance Examination Main", 
+                difficulty: "High", 
+                candidates: "~12 lakh", 
+                seats: "~1.5 lakh", 
+                duration: "3 hours", 
+                regDate: "Session 1: Nov-Dec 2025, Session 2: Feb 2026", 
+                examDate: "Session 1: Jan 2026, Session 2: April 2026", 
+                regFee: "₹1,000 (Gen Male), ₹800 (Gen Female), ₹500 (SC/ST/PwD)", 
+                syllabus: "Physics, Chemistry, Mathematics - Class 11-12 NCERT + Advanced Concepts", 
+                degrees: ["B.Tech", "B.E.", "B.Arch", "B.Planning"], 
+                topColleges: [
+                    { name: "NIT Trichy", cutoff: "98.5%ile", avgPkg: "₹16 LPA", highPkg: "₹42 LPA", fee: "₹1.5L/yr", type: "Government" },
+                    { name: "NIT Surathkal", cutoff: "98.2%ile", avgPkg: "₹15 LPA", highPkg: "₹40 LPA", fee: "₹1.4L/yr", type: "Government" },
+                    { name: "IIIT Hyderabad", cutoff: "99.3%ile", avgPkg: "₹24 LPA", highPkg: "₹60 LPA", fee: "₹2.5L/yr", type: "Government" },
+                    { name: "NIT Warangal", cutoff: "98%ile", avgPkg: "₹14 LPA", highPkg: "₹38 LPA", fee: "₹1.3L/yr", type: "Government" },
+                    { name: "IIIT Bangalore", cutoff: "99.5%ile", avgPkg: "₹25 LPA", highPkg: "₹65 LPA", fee: "₹3L/yr", type: "Government" }
+                ]
+            },
+            { 
+                id: 2, 
+                name: "JEE Advanced", 
+                fullName: "Joint Entrance Examination Advanced", 
+                difficulty: "Very High", 
+                candidates: "~2.5 lakh (Top JEE Main qualifiers)", 
+                seats: "~16,000", 
+                duration: "3 hours × 2 papers", 
+                regDate: "May 2026", 
+                examDate: "May 2026 (Conducted by IIT Roorkee)", 
+                regFee: "₹2,800 (General/OBC-NCL), ₹1,400 (SC/ST/PwD)", 
+                syllabus: "Advanced level Physics, Chemistry, Mathematics - Beyond JEE Main", 
+                degrees: ["B.Tech", "B.S.", "Dual Degree", "Integrated M.Tech", "B.Arch"], 
+                topColleges: [
+                    { name: "IIT Bombay", cutoff: "Rank ~100", avgPkg: "₹23 LPA", highPkg: "₹2.14 Cr", fee: "₹2.3L/yr", type: "Government" },
+                    { name: "IIT Delhi", cutoff: "Rank ~200", avgPkg: "₹21 LPA", highPkg: "₹2 Cr", fee: "₹2.3L/yr", type: "Government" },
+                    { name: "IIT Madras", cutoff: "Rank ~180", avgPkg: "₹22 LPA", highPkg: "₹1.9 Cr", fee: "₹2.3L/yr", type: "Government" },
+                    { name: "IIT Kanpur", cutoff: "Rank ~250", avgPkg: "₹20 LPA", highPkg: "₹1.8 Cr", fee: "₹2.3L/yr", type: "Government" },
+                    { name: "IIT Kharagpur", cutoff: "Rank ~300", avgPkg: "₹19 LPA", highPkg: "₹1.7 Cr", fee: "₹2.2L/yr", type: "Government" },
+                    { name: "IIT Roorkee", cutoff: "Rank ~400", avgPkg: "₹18 LPA", highPkg: "₹1.6 Cr", fee: "₹2.2L/yr", type: "Government" }
+                ]
+            },
+            { 
+                id: 3, 
+                name: "BITSAT", 
+                fullName: "BITS Admission Test", 
+                difficulty: "High", 
+                candidates: "~2.5 lakh", 
+                seats: "~2,000", 
+                duration: "3 hours", 
+                regDate: "Session 1: Dec 2025-Mar 2026, Session 2: Apr-May 2026", 
+                examDate: "Session 1: Apr 15-17, 2026, Session 2: May 24-26, 2026", 
+                regFee: "₹3,600 (Male Session 1), ₹3,100 (Female Session 1), ₹5,600 (Male Both), ₹4,500 (Female Both)", 
+                syllabus: "Physics, Chemistry, Mathematics, English Proficiency, Logical Reasoning", 
+                degrees: ["B.E.", "B.Pharm", "M.Sc."], 
+                topColleges: [
+                    { name: "BITS Pilani", cutoff: "320+/390", avgPkg: "₹18 LPA", highPkg: "₹60 LPA", fee: "₹5.5L/yr", type: "Private" },
+                    { name: "BITS Goa", cutoff: "295+/390", avgPkg: "₹16 LPA", highPkg: "₹55 LPA", fee: "₹5.3L/yr", type: "Private" },
+                    { name: "BITS Hyderabad", cutoff: "285+/390", avgPkg: "₹15 LPA", highPkg: "₹50 LPA", fee: "₹5.3L/yr", type: "Private" }
+                ]
+            },
+            { 
+                id: 4, 
+                name: "VITEEE", 
+                fullName: "VIT Engineering Entrance Exam", 
+                difficulty: "Moderate-High", 
+                candidates: "~5 lakh", 
+                seats: "~8,000", 
+                duration: "2.5 hours", 
+                regDate: "Oct 2025 - March 31, 2026", 
+                examDate: "April 28 - May 3, 2026", 
+                regFee: "₹1,350", 
+                syllabus: "Physics, Chemistry, Mathematics, English, Aptitude (Negative marking introduced)", 
+                degrees: ["B.Tech"], 
+                topColleges: [
+                    { name: "VIT Vellore", cutoff: "Rank ~5,000", avgPkg: "₹8.5 LPA", highPkg: "₹45 LPA", fee: "₹2L-4L/yr", type: "Private" },
+                    { name: "VIT Chennai", cutoff: "Rank ~15,000", avgPkg: "₹7 LPA", highPkg: "₹38 LPA", fee: "₹2L-4L/yr", type: "Private" },
+                    { name: "VIT AP", cutoff: "Rank ~20,000", avgPkg: "₹6.5 LPA", highPkg: "₹32 LPA", fee: "₹2L-3.5L/yr", type: "Private" },
+                    { name: "VIT Bhopal", cutoff: "Rank ~25,000", avgPkg: "₹6 LPA", highPkg: "₹30 LPA", fee: "₹2L-3.5L/yr", type: "Private" }
+                ]
+            },
+            { 
+                id: 5, 
+                name: "SRMJEEE", 
+                fullName: "SRM Joint Engineering Entrance Exam", 
+                difficulty: "Moderate", 
+                candidates: "~2.5 lakh", 
+                seats: "~10,000", 
+                duration: "2.5 hours", 
+                regDate: "Phase 1: Oct 2025-Apr 16, Phase 2: Till Jun 4, Phase 3: Till Jun 30", 
+                examDate: "Phase 1: Apr 23-28, Phase 2: Jun 10-15, Phase 3: Jul 4-5, 2026", 
+                regFee: "₹1,400 per phase", 
+                syllabus: "Physics, Chemistry, Mathematics/Biology, Aptitude (No negative marking)", 
+                degrees: ["B.Tech", "B.Arch"], 
+                topColleges: [
+                    { name: "SRM Chennai", cutoff: "Rank ~8,000", avgPkg: "₹7.5 LPA", highPkg: "₹42 LPA", fee: "₹2.5L-4L/yr", type: "Private" },
+                    { name: "SRM NCR", cutoff: "Rank ~20,000", avgPkg: "₹6 LPA", highPkg: "₹30 LPA", fee: "₹2.2L-3.5L/yr", type: "Private" },
+                    { name: "SRM Sonepat", cutoff: "Rank ~25,000", avgPkg: "₹5.5 LPA", highPkg: "₹28 LPA", fee: "₹2L-3L/yr", type: "Private" }
+                ]
+            },
+            { 
+                id: 6, 
+                name: "MET", 
+                fullName: "Manipal Entrance Test", 
+                difficulty: "Moderate", 
+                candidates: "~1.8 lakh", 
+                seats: "~6,000", 
+                duration: "2.5 hours", 
+                regDate: "Jan - April 2026", 
+                examDate: "April - May 2026", 
+                regFee: "₹2,500", 
+                syllabus: "Physics, Chemistry, Mathematics, English Comprehension", 
+                degrees: ["B.Tech"], 
+                topColleges: [
+                    { name: "MIT Manipal", cutoff: "Rank ~3,000", avgPkg: "₹7.8 LPA", highPkg: "₹43 LPA", fee: "₹3.5L/yr", type: "Private" },
+                    { name: "MIT Bangalore", cutoff: "Rank ~8,000", avgPkg: "₹6.5 LPA", highPkg: "₹35 LPA", fee: "₹3.2L/yr", type: "Private" },
+                    { name: "MIT Jaipur", cutoff: "Rank ~12,000", avgPkg: "₹5.5 LPA", highPkg: "₹28 LPA", fee: "₹2.8L/yr", type: "Private" }
+                ]
+            },
+            { 
+                id: 7, 
+                name: "COMEDK", 
+                fullName: "Consortium of Medical, Engineering and Dental Colleges of Karnataka", 
+                difficulty: "Moderate-High", 
+                candidates: "~80,000", 
+                seats: "~35,000", 
+                duration: "3 hours", 
+                regDate: "March - April 2026", 
+                examDate: "May 2026", 
+                regFee: "₹1,800", 
+                syllabus: "Physics, Chemistry, Mathematics (Based on Karnataka PUC)", 
+                degrees: ["B.Tech", "B.Arch"], 
+                topColleges: [
+                    { name: "RV College (RVCE)", cutoff: "Rank ~800", avgPkg: "₹10 LPA", highPkg: "₹45 LPA", fee: "₹1.2L/yr", type: "Private" },
+                    { name: "BMS College", cutoff: "Rank ~1,200", avgPkg: "₹8.5 LPA", highPkg: "₹40 LPA", fee: "₹1L/yr", type: "Private" },
+                    { name: "PES University", cutoff: "Rank ~2,000", avgPkg: "₹8 LPA", highPkg: "₹38 LPA", fee: "₹3.5L/yr", type: "Private" },
+                    { name: "MS Ramaiah", cutoff: "Rank ~2,500", avgPkg: "₹7.5 LPA", highPkg: "₹35 LPA", fee: "₹2.5L/yr", type: "Private" }
+                ]
+            },
+            { 
+                id: 8, 
+                name: "MHT CET", 
+                fullName: "Maharashtra Common Entrance Test", 
+                difficulty: "Moderate", 
+                candidates: "~4.5 lakh", 
+                seats: "~1.5 lakh", 
+                duration: "90 min per paper (2 papers)", 
+                regDate: "March - April 2026", 
+                examDate: "May 2026", 
+                regFee: "₹1,000 (Gen), ₹800 (Reserved)", 
+                syllabus: "Physics, Chemistry, Mathematics (Based on Maharashtra HSC)", 
+                degrees: ["B.Tech", "B.E."], 
+                topColleges: [
+                    { name: "VJTI Mumbai", cutoff: "99.5%ile", avgPkg: "₹10 LPA", highPkg: "₹40 LPA", fee: "₹80k/yr", type: "Government" },
+                    { name: "COEP Pune", cutoff: "99%ile", avgPkg: "₹9 LPA", highPkg: "₹35 LPA", fee: "₹75k/yr", type: "Government" },
+                    { name: "ICT Mumbai", cutoff: "98.8%ile", avgPkg: "₹12 LPA", highPkg: "₹45 LPA", fee: "₹85k/yr", type: "Government" },
+                    { name: "PICT Pune", cutoff: "98%ile", avgPkg: "₹8 LPA", highPkg: "₹32 LPA", fee: "₹1.2L/yr", type: "Private" }
+                ]
+            },
+            { 
+                id: 9, 
+                name: "WBJEE", 
+                fullName: "West Bengal Joint Entrance Examination", 
+                difficulty: "Moderate", 
+                candidates: "~1.5 lakh", 
+                seats: "~75,000", 
+                duration: "2 hours per paper (2 papers)", 
+                regDate: "Dec 2025 - March 2026", 
+                examDate: "April 2026", 
+                regFee: "₹500 (Gen), ₹450 (SC/ST)", 
+                syllabus: "Physics, Chemistry, Mathematics (Based on WBCHSE)", 
+                degrees: ["B.Tech", "B.E.", "B.Pharm"], 
+                topColleges: [
+                    { name: "Jadavpur University", cutoff: "Rank ~200", avgPkg: "₹9 LPA", highPkg: "₹35 LPA", fee: "₹12k/yr", type: "Government" },
+                    { name: "Calcutta University", cutoff: "Rank ~500", avgPkg: "₹7.5 LPA", highPkg: "₹28 LPA", fee: "₹10k/yr", type: "Government" },
+                    { name: "Heritage Institute", cutoff: "Rank ~3,000", avgPkg: "₹6.5 LPA", highPkg: "₹28 LPA", fee: "₹1.5L/yr", type: "Private" },
+                    { name: "Techno India", cutoff: "Rank ~5,000", avgPkg: "₹5.5 LPA", highPkg: "₹22 LPA", fee: "₹1.2L/yr", type: "Private" }
+                ]
+            },
+            { 
+                id: 10, 
+                name: "KIITEE", 
+                fullName: "KIIT Entrance Examination", 
+                difficulty: "Moderate", 
+                candidates: "~1 lakh", 
+                seats: "~8,000", 
+                duration: "3 hours", 
+                regDate: "Nov 2025 - March 2026", 
+                examDate: "April 2026", 
+                regFee: "₹2,000", 
+                syllabus: "Physics, Chemistry, Mathematics", 
+                degrees: ["B.Tech", "B.Arch"], 
+                topColleges: [
+                    { name: "KIIT Bhubaneswar", cutoff: "Rank ~5,000", avgPkg: "₹7.5 LPA", highPkg: "₹39 LPA", fee: "₹3L/yr", type: "Private" }
+                ]
+            },
+            { 
+                id: 11, 
+                name: "IPM (IIM)", 
+                fullName: "Integrated Programme in Management", 
+                difficulty: "High", 
+                candidates: "~25,000", 
+                seats: "~600", 
+                duration: "3 hours", 
+                regDate: "Feb - March 2026", 
+                examDate: "May 2026", 
+                regFee: "₹3,500", 
+                syllabus: "Quantitative Ability, Verbal Ability, Logical Reasoning", 
+                degrees: ["BBA + MBA (5-year Integrated)"], 
+                topColleges: [
+                    { name: "IIM Indore", cutoff: "99.5%ile", avgPkg: "₹25 LPA", highPkg: "₹55 LPA", fee: "₹6L/yr", type: "Government" },
+                    { name: "IIM Rohtak", cutoff: "98.5%ile", avgPkg: "₹20 LPA", highPkg: "₹45 LPA", fee: "₹5.5L/yr", type: "Government" },
+                    { name: "IIM Ranchi", cutoff: "97%ile", avgPkg: "₹18 LPA", highPkg: "₹40 LPA", fee: "₹5L/yr", type: "Government" },
+                    { name: "IIM Bodh Gaya", cutoff: "96%ile", avgPkg: "₹16 LPA", highPkg: "₹35 LPA", fee: "₹4.5L/yr", type: "Government" }
+                ]
+            },
+            { 
+                id: 12, 
+                name: "NMIMS NPAT", 
+                fullName: "Narsee Monjee Proficiency Assessment Test", 
+                difficulty: "Moderate-High", 
+                candidates: "~60,000", 
+                seats: "~2,000", 
+                duration: "2 hours", 
+                regDate: "Jan - April 2026", 
+                examDate: "May 2026", 
+                regFee: "₹2,000", 
+                syllabus: "Quantitative Skills, Language Skills, Logical Reasoning, Proficiency", 
+                degrees: ["BBA, B.Tech + MBA, Integrated MBA"], 
+                topColleges: [
+                    { name: "NMIMS Mumbai", cutoff: "85%ile", avgPkg: "₹12 LPA", highPkg: "₹25 LPA", fee: "₹3.8L/yr", type: "Private" },
+                    { name: "NMIMS Bangalore", cutoff: "78%ile", avgPkg: "₹10 LPA", highPkg: "₹20 LPA", fee: "₹3.5L/yr", type: "Private" },
+                    { name: "NMIMS Hyderabad", cutoff: "75%ile", avgPkg: "₹9 LPA", highPkg: "₹18 LPA", fee: "₹3.2L/yr", type: "Private" }
+                ]
+            },
+            { 
+                id: 13, 
+                name: "CUET", 
+                fullName: "Common University Entrance Test", 
+                difficulty: "Moderate", 
+                candidates: "~15 lakh", 
+                seats: "~3 lakh", 
+                duration: "45-60 min per section", 
+                regDate: "Feb - March 2026", 
+                examDate: "May 2026", 
+                regFee: "₹650 (4 subjects), additional ₹200 per subject", 
+                syllabus: "Domain-specific subjects, General Test, Languages", 
+                degrees: ["BA Economics, BA (Hons), B.Com, BMS, BBA"], 
+                topColleges: [
+                    { name: "DU - St. Stephen's", cutoff: "99.8%ile", avgPkg: "₹8 LPA", highPkg: "₹20 LPA", fee: "₹50k/yr", type: "Government" },
+                    { name: "DU - SRCC", cutoff: "99.7%ile", avgPkg: "₹9 LPA", highPkg: "₹22 LPA", fee: "₹45k/yr", type: "Government" },
+                    { name: "JNU", cutoff: "99%ile", avgPkg: "₹7 LPA", highPkg: "₹18 LPA", fee: "₹30k/yr", type: "Government" },
+                    { name: "BHU", cutoff: "98%ile", avgPkg: "₹6.5 LPA", highPkg: "₹15 LPA", fee: "₹25k/yr", type: "Government" }
+                ]
+            },
+            { 
+                id: 14, 
+                name: "Thapar JEE", 
+                fullName: "Thapar Institute of Engineering and Technology", 
+                difficulty: "Moderate", 
+                candidates: "Based on JEE Main scores", 
+                seats: "~4,000", 
+                duration: "JEE Main", 
+                regDate: "March - June 2026", 
+                examDate: "Admission via JEE Main scores", 
+                regFee: "₹1,800", 
+                syllabus: "JEE Main syllabus", 
+                degrees: ["B.E.", "B.Tech", "Dual Degree"], 
+                topColleges: [
+                    { name: "Thapar Patiala", cutoff: "93%ile JEE", avgPkg: "₹10 LPA", highPkg: "₹43 LPA", fee: "₹3.5L/yr", type: "Private" }
+                ]
+            }
         ];
 
         const CollegePortal = () => {
             const [isLoggedIn, setIsLoggedIn] = useState(false);
             const [username, setUsername] = useState('');
-            const [password, setPassword] = useState('');
-            const [loginError, setLoginError] = useState('');
             const [selectedExam, setSelectedExam] = useState(null);
             const [searchQuery, setSearchQuery] = useState('');
             const [filterDifficulty, setFilterDifficulty] = useState('all');
@@ -75,9 +329,9 @@
 
             const handleLogin = (e) => {
                 e.preventDefault();
-                if (['parth', 'utkarsh'].includes(username.toLowerCase()) && password === '7092008') {
-                    setIsLoggedIn(true); setLoginError('');
-                } else setLoginError('Invalid credentials. Check username or DOB format (DDMMYYYY)');
+                if (username.trim()) {
+                    setIsLoggedIn(true);
+                }
             };
 
             const filteredExams = entranceExams.filter(e => 
@@ -112,25 +366,12 @@
                                     </div>
                                     <form onSubmit={handleLogin} className="space-y-5">
                                         <div>
-                                            <label className="block text-white/90 text-sm font-medium mb-2">Username</label>
+                                            <label className="block text-white/90 text-sm font-medium mb-2">Enter Your Name</label>
                                             <div className="relative">
                                                 <LucideIcon name="user" className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-white/50" />
-                                                <input type="text" value={username} onChange={e => setUsername(e.target.value)} placeholder="parth or utkarsh" className="w-full bg-white/10 border border-white/20 rounded-xl px-12 py-3.5 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-purple-500/50 backdrop-blur-xl" />
+                                                <input type="text" value={username} onChange={e => setUsername(e.target.value)} placeholder="Enter your name" className="w-full bg-white/10 border border-white/20 rounded-xl px-12 py-3.5 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-purple-500/50 backdrop-blur-xl" />
                                             </div>
                                         </div>
-                                        <div>
-                                            <label className="block text-white/90 text-sm font-medium mb-2">Password</label>
-                                            <div className="relative">
-                                                <LucideIcon name="lock" className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-white/50" />
-                                                <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="DOB: DDMMYYYY (e.g. 7092008)" className="w-full bg-white/10 border border-white/20 rounded-xl px-12 py-3.5 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-purple-500/50 backdrop-blur-xl" />
-                                            </div>
-                                        </div>
-                                        {loginError && (
-                                            <div className="flex items-start gap-2 bg-red-500/20 border border-red-500/30 rounded-xl p-3">
-                                                <LucideIcon name="alert-circle" className="w-5 h-5 text-red-400" />
-                                                <p className="text-red-200 text-sm">{loginError}</p>
-                                            </div>
-                                        )}
                                         <button type="submit" className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold py-3.5 rounded-xl transition-all duration-300 shadow-lg">Enter Portal</button>
                                     </form>
                                 </div>
@@ -228,13 +469,13 @@
                                                 </div>
                                             </div>
                                             <div className="space-y-3 mb-6">
-                                                <div className="flex items-center gap-3 text-sm">
-                                                    <LucideIcon name="calendar" className="w-4 h-4 text-orange-400" />
-                                                    <span className="text-white/60">Registration:</span><span className="font-medium">{exam.regDate}</span>
+                                                <div className="flex items-start gap-3 text-sm">
+                                                    <LucideIcon name="calendar" className="w-4 h-4 text-orange-400 mt-0.5" />
+                                                    <div><span className="text-white/60">Registration: </span><span className="font-medium">{exam.regDate}</span></div>
                                                 </div>
-                                                <div className="flex items-center gap-3 text-sm">
-                                                    <LucideIcon name="calendar" className="w-4 h-4 text-pink-400" />
-                                                    <span className="text-white/60">Exam Date:</span><span className="font-medium">{exam.examDate}</span>
+                                                <div className="flex items-start gap-3 text-sm">
+                                                    <LucideIcon name="calendar" className="w-4 h-4 text-pink-400 mt-0.5" />
+                                                    <div><span className="text-white/60">Exam Date: </span><span className="font-medium">{exam.examDate}</span></div>
                                                 </div>
                                             </div>
                                             <button onClick={() => setSelectedExam(exam)} className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold py-3 rounded-xl flex items-center justify-center gap-2">
@@ -316,4 +557,5 @@
         const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<CollegePortal />);
     </script>
-</body></html>
+</body>
+</html>
